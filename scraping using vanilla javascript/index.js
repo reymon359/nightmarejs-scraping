@@ -23,7 +23,14 @@ const nightmare = Nightmare({
                 let url = row.querySelector('td[class="title"] > a').getAttribute('href');
                 let source = row.querySelector('span[class="sitebit comhead"] > a') ? row.querySelector('span[class="sitebit comhead"] > a').innerText : false;
 
-                articles.push({ title, url, source });
+                let secondRow = row.nextSibling;
+
+                let points = secondRow.querySelector('span[class="score"]') ? secondRow.querySelector('span[class="score"]').innerText : false;
+                let author = secondRow.querySelector('a[class="hnuser"]') ? secondRow.querySelector('a[class="hnuser"]').innerText : false;
+                let date = secondRow.querySelector('span[class="age"]').innerText;
+                let comments = secondRow.querySelectorAll('a')[3] ? secondRow.querySelectorAll('a')[3].innerText : false;
+
+                articles.push({ title, url, source, points, author, date, comments });
 
             }
 
